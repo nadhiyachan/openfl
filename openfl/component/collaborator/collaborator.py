@@ -480,8 +480,8 @@ class Collaborator:
         print ("Collaborator name ====> ", self.collaborator_name)
         print ("Round Number ===> ", round_number)
         print ("Task Name ====> ", task_name)
-        print ("Data Size =====> ", data_size)
-        print ("Named tensor ====> ", named_tensor)
+        print ("Data Size =====> ",  data_size)
+        #print ("Named tensor ====> ", named_tensors)
         print ("****************************************************************************************************")        
 
         self.client.send_local_task_results(
