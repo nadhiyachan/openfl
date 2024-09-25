@@ -96,6 +96,10 @@ def start_(plan, collaborator_name, data_config, secure):
     # TODO: Need to restructure data loader config file loader
 
     echo(f"Data = {plan.cols_data_paths}")
+
+    logger.info("***************************************************************************************************")
+    logger.info("           RIYA INSIDE COLLABORATOR                                                                ")
+    logger.info("***************************************************************************************************")
     logger.info("🧿 Starting a Collaborator Service.")
 
     plan.get_collaborator(collaborator_name).run()

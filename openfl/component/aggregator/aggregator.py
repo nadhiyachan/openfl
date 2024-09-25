@@ -7,6 +7,7 @@ import queue
 import time
 from logging import getLogger
 from threading import Lock
+import psutil
 
 from openfl.component.straggler_handling_functions import CutoffTimeBasedStragglerHandling
 from openfl.databases import TensorDB
@@ -659,7 +660,25 @@ class Aggregator:
                 self.logger.metric("%s", str(metrics))
 
             task_results.append(tensor_key)
+            
+        #NAD: Getting meemory usage
+        virtual_memory = psutil.virtual_memory()
+        mem_used = round(virtual_memory.used / (1024 ** 2),2)
+        print ("******************************************RIYA****************************************************")
+        print ("MEM USED ======> ", mem_used)
+        print ("******************************************RIYA****************************************************")
 
+        history = {
+                    "round": round_number,
+                    "metric_origin": "aggregator",
+                    "task_name": "telemetry",
+                    "metric_name": "MEM_USAGE",
+                    "metric_value": mem_used,
+        }
+        self.metric_queue.put(history)
+        print ("******************************************RIYA****************************************************")
+        print ("HISTORY   ======> ", history)
+        print ("******************************************RIYA****************************************************")
         self.collaborator_tasks_results[task_key] = task_results
 
         with self.lock:

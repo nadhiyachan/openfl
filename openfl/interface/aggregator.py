@@ -80,7 +80,10 @@ def start_(plan, authorized_cols, secure):
         plan_config_path=Path(plan).absolute(),
         cols_config_path=Path(authorized_cols).absolute(),
     )
-
+    
+    logger.info("***************************************************************************************************")
+    logger.info("                        RIYA INSIDE AGGREGATOR                                                     ")
+    logger.info("***************************************************************************************************")
     logger.info("🧿 Starting the Aggregator Service.")
 
     plan.get_server().serve()

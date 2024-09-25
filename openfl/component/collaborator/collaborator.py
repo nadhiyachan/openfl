@@ -476,6 +476,14 @@ class Collaborator:
                     f" {tensor_name}\t{tensor_dict[tensor]:f}"
                 )
 
+        print ("**********************************RIYA******************************************************************")
+        print ("Collaborator name ====> ", self.collaborator_name)
+        print ("Round Number ===> ", round_number)
+        print ("Task Name ====> ", task_name)
+        print ("Data Size =====> ", data_size)
+        print ("Named tensor ====> ", named_tensor)
+        print ("****************************************************************************************************")        
+
         self.client.send_local_task_results(
             self.collaborator_name,
             round_number,
