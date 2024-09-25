@@ -455,11 +455,12 @@ class Collaborator:
         virtual_memory = psutil.virtual_memory()
         mem_used = round(virtual_memory.used / (1024 ** 2),2)
         print("Memory Used ==> ", mem_used)
-        tensor_dict.update({"MEM_USAGE": mem_used})
+        print("TENSOR DICT ===> ",tensor_dict) 
+        #tensor_dict.update({"MEM_USAGE": mem_used})
 
         named_tensors = [self.nparray_to_named_tensor(k, v) for k, v in tensor_dict.items()]
 
-        #named_tensors.append(self.nparray_to_named_tensor("MEM_USAGE", mem_used)
+        named_tensors.append(self.nparray_to_named_tensor("MEM_USAGE", mem_used))
         # for general tasks, there may be no notion of data size to send.
         # But that raises the question how to properly aggregate results.
 
