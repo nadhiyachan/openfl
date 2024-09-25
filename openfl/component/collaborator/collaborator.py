@@ -456,11 +456,16 @@ class Collaborator:
         mem_used = round(virtual_memory.used / (1024 ** 2),2)
         print("Memory Used ==> ", mem_used)
         print("TENSOR DICT ===> ",tensor_dict) 
-        #tensor_dict.update({"MEM_USAGE": mem_used})
+        #tensor_dict.update({"MEM_USAGE": mem_used,None,3,True,("metric")})
+        #tensor_dict.update({('mem_usage',None,3,True,('Metric',)):mem_usage})
+        tensor_dict.update({TensorKey('MEM_USAGE',None,3,True,('Metric',)):mem_used})
+
+        print ("I HAVE PASSED THIS POINT")
+        print("TENSOR DICT ===> ",tensor_dict) 
 
         named_tensors = [self.nparray_to_named_tensor(k, v) for k, v in tensor_dict.items()]
 
-        named_tensors.append(self.nparray_to_named_tensor("MEM_USAGE", mem_used))
+        #named_tensors.append(self.nparray_to_named_tensor("MEM_USAGE", mem_used))
         # for general tasks, there may be no notion of data size to send.
         # But that raises the question how to properly aggregate results.
 
