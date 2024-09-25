@@ -8,6 +8,7 @@ from enum import Enum
 from logging import getLogger
 from time import sleep
 from typing import Tuple
+import psutil
 
 from openfl.databases import TensorDB
 from openfl.pipelines import NoCompressionPipeline, TensorCodec
@@ -451,8 +452,14 @@ class Collaborator:
             round_number (int):  Actual round number.
             task_name (string): Task name.
         """
+        virtual_memory = psutil.virtual_memory()
+        mem_used = round(virtual_memory.used / (1024 ** 2),2)
+        print("Memory Used ==> ", mem_used)
+        tensor_dict.update({"MEM_USAGE": mem_used})
+
         named_tensors = [self.nparray_to_named_tensor(k, v) for k, v in tensor_dict.items()]
 
+        #named_tensors.append(self.nparray_to_named_tensor("MEM_USAGE", mem_used)
         # for general tasks, there may be no notion of data size to send.
         # But that raises the question how to properly aggregate results.
 
