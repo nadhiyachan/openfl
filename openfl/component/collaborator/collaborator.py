@@ -459,7 +459,7 @@ class Collaborator:
         print("TENSOR DICT ===> ",tensor_dict) 
         #tensor_dict.update({"MEM_USAGE": mem_used,None,3,True,("metric")})
         #tensor_dict.update({('mem_usage',None,3,True,('Metric',)):mem_usage})
-        tensor_dict.update({TensorKey('MEM_USAGE',None,3,True,('Metric',)):np.array(mem_used)})
+        #tensor_dict.update({TensorKey('MEM_USAGE',None,3,True,('Metric',)):np.array(mem_used)}) -- Error:float() argument must be a string or a real number, not 'tuple'in aggregator logs
 
         print ("I HAVE PASSED THIS POINT")
         print("TENSOR DICT ===> ",tensor_dict) 
