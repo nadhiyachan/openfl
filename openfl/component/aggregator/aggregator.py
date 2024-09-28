@@ -663,68 +663,10 @@ class Aggregator:
             
         #NAD: Getting meemory usage
         virtual_memory = psutil.virtual_memory()
-        swap_memory = psutil.swap_memory()
-
-        header = ['Timestamp', 'RoundInfo', 'Virtual Total (MB)', 'Virtual Available(MB)' , 'Virtual Percent' ,'Virtual Used (MB)', 'Virtual Free (MB)', 'Virtual Active(MB)', 'Virtual InActive(MB)',
-              'Virtual Buffers', 'Virtual Cached', 'Virutal Shared','Swap Total (MB)', 'Swap Used (MB)', 'Swap Free (MB)', 'Swap Percent']
-
-        # Write header to CSV if file doesn't exist
-        try:
-            with open('mem_usage.csv', 'x', newline='') as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow(header)
-        except FileExistsError:
-            pass  # File already exists
-
-        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-
-        memory_stats ={
-            'virtual_total': round(virtual_memory.total / (1024 ** 2),2),
-            'virtual_available': round(virtual_memory.available / (1024 ** 2),2),
-            'virtual_percent': virtual_memory.percent,
-            'virtual_used': round(virtual_memory.used / (1024 ** 2),2),
-            'virtual_free': round(virtual_memory.free / (1024 ** 2),2),
-            'virtual_active': round(virtual_memory.active / (1024 ** 2),2),
-            'virtual_inactive': round(virtual_memory.inactive / (1024 ** 2),2),
-            'virtual_buffers': round(virtual_memory.buffers / (1024 ** 2),2),
-            'virtual_cached': round(virtual_memory.cached / (1024 ** 2),2),
-            'virtual_shared': round(virtual_memory.shared / (1024 ** 2),2),
-            'swap_total': round(swap_memory.total / (1024 ** 2),2),
-            'swap_used': round(swap_memory.used / (1024 ** 2),2),
-            'swap_free': round(swap_memory.free / (1024 ** 2),2),
-            'swap_percent': swap_memory.percent   
-        }
-
-        print ("Memory Stats: ", memory_stats)
-
-        data = [
-            timestamp,
-            round_number,
-            memory_stats['virtual_total'],
-            memory_stats['virtual_available'],
-            memory_stats['virtual_percent'],
-            memory_stats['virtual_used'],
-            memory_stats['virtual_free'],
-            memory_stats['virtual_active'],
-            memory_stats['virtual_inactive'],
-            memory_stats['virtual_buffers'],
-            memory_stats['virtual_cached'],
-            memory_stats['virtual_shared'],
-            memory_stats['swap_total'],
-            memory_stats['swap_used'],
-            memory_stats['swap_free'],
-            memory_stats['swap_percent']
-        ]
-
-        filename = "mem_usage_aggregator.csv"
-        with open(filename, mode='a', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(data)
-
-        
-
         mem_used = round(virtual_memory.used / (1024 ** 2),2)
         print ("******************************************RIYA****************************************************")
+        print ("*******************************RIYA AGGREGATOR LOGS **********************************************")
+        print ("ROUND NUMBER ===> ", round_number)
         print ("MEM USED ======> ", mem_used)
         print ("******************************************RIYA****************************************************")
 

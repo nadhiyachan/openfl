@@ -455,8 +455,13 @@ class Collaborator:
         """
         virtual_memory = psutil.virtual_memory()
         mem_used = round(virtual_memory.used / (1024 ** 2),2)
-        print("Memory Used ==> ", mem_used)
-        print("TENSOR DICT ===> ",tensor_dict) 
+        print ("******************************************RIYA****************************************************")
+        print ("*******************************RIYA collaborator LOGS **********************************************")
+        print ("ROUND NUMBER ===> ", round_number)
+        print ("Collaborator name ====> ", self.collaborator_name)
+        print ("MEM USED ======> ", mem_used)
+        print ("******************************************RIYA****************************************************")
+
         #tensor_dict.update({"MEM_USAGE": mem_used,None,3,True,("metric")})
         #tensor_dict.update({('mem_usage',None,3,True,('Metric',)):mem_usage})
         #tensor_dict.update({TensorKey('MEM_USAGE',None,3,True,('Metric',)):np.array(mem_used)}) -- Error:float() argument must be a string or a real number, not 'tuple'in aggregator logs
