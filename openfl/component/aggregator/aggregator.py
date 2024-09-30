@@ -663,6 +663,10 @@ class Aggregator:
             
         #NAD: Calling your print memory functions
         self.print_memory_usage(round_number)
+        virtual_memory = psutil.virtual_memory()
+        swap_memory = psutil.swap_memory()
+
+        mem_used = round(virtual_memory.used / (1024 ** 2),2)
 
         history = {
                     "round": round_number,
@@ -716,6 +720,7 @@ class Aggregator:
         print ("RIYA Swap Free: ", swap_free )
         print ("RIYA Swap Percent: ", swap_prcnt )
         print ("*******************************************************************************************")
+
 
     def _end_of_round_with_stragglers_check(self):
         """
