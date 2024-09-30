@@ -173,8 +173,29 @@ class Collaborator:
 
                 # Cleaning tensor db
                 self.tensor_db.clean_up(self.db_store_rounds)
+                # NAD:TODO : Get the Mem usage info here 
+                self.print_memory_usage(round_number)
+                
 
         self.logger.info("End of Federation reached. Exiting...")
+
+    def print_memory_usage(self, round_number):
+        print ("Iam in print_memory_usage")
+        virtual_memory = psutil.virtual_memory()
+        swap_memory = psutil.swap_memory()
+        virt_total = round(virtual_memory.total / (1024 ** 2),2)
+        virt_avail = round(virtual_memory.available / (1024 ** 2),2)
+        virt_prcnt = virtual_memory.percent
+        virt_used = round(virtual_memory.used / (1024 ** 2),2)
+        print ("******************************** RIYA COLLABORATOR LOGS***********************************")
+        print ("RIYA Round Number : ", round_number)
+        print ("RIYA Collaborator Name: ", self.collaborator_name)
+        print ("RIYA Virtual Total: ", virt_total)
+        print ("RIYA Virtual Used: ", virt_used)
+        print ("RIYA Virtual Avail: ", virt_avail)
+        print ("RIYA Virtual Prcnt: ", virt_prcnt)
+        print ("*******************************************************************************************")
+
 
     def run_simulation(self):
         """Specific function for the simulation.
@@ -453,22 +474,9 @@ class Collaborator:
             round_number (int):  Actual round number.
             task_name (string): Task name.
         """
-        virtual_memory = psutil.virtual_memory()
-        mem_used = round(virtual_memory.used / (1024 ** 2),2)
-        print ("******************************************RIYA****************************************************")
-        print ("*******************************RIYA collaborator LOGS **********************************************")
-        print ("ROUND NUMBER ===> ", round_number)
-        print ("Collaborator name ====> ", self.collaborator_name)
-        print ("MEM USED ======> ", mem_used)
-        print ("TASK NAME ====> ", task_name)
-        print ("******************************************RIYA****************************************************")
-
         #tensor_dict.update({"MEM_USAGE": mem_used,None,3,True,("metric")})
         #tensor_dict.update({('mem_usage',None,3,True,('Metric',)):mem_usage})
         #tensor_dict.update({TensorKey('MEM_USAGE',None,3,True,('Metric',)):np.array(mem_used)}) -- Error:float() argument must be a string or a real number, not 'tuple'in aggregator logs
-
-        print ("I HAVE PASSED THIS POINT")
-        print("TENSOR DICT ===> ",tensor_dict) 
 
         named_tensors = [self.nparray_to_named_tensor(k, v) for k, v in tensor_dict.items()]
 
@@ -495,18 +503,6 @@ class Collaborator:
                     f"is sending metric for task {task_name}:"
                     f" {tensor_name}\t{tensor_dict[tensor]:f}"
                 )
-
-        print ("**********************************RIYA******************************************************************")
-        print ("Collaborator name ====> ", self.collaborator_name)
-        print ("Tensor Name ===> ", tensor_name)
-        print ("Origin ====> ", origin)
-        print ("FL Round ====> ", fl_round)
-        print ("Report ===> ", report)
-        print ("Tags ===> ", tags)
-        print ("Task Name  ===> ", task_name)
-        print ("Data Size ====> ", data_size)
-        print ("Named Tensors ===> ", named_tensors)
-        print ("****************************************************************************************************")        
 
         self.client.send_local_task_results(
             self.collaborator_name,
