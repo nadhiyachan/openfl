@@ -460,6 +460,7 @@ class Collaborator:
         print ("ROUND NUMBER ===> ", round_number)
         print ("Collaborator name ====> ", self.collaborator_name)
         print ("MEM USED ======> ", mem_used)
+        print ("TASK NAME ====> ", task_name)
         print ("******************************************RIYA****************************************************")
 
         #tensor_dict.update({"MEM_USAGE": mem_used,None,3,True,("metric")})
@@ -497,10 +498,14 @@ class Collaborator:
 
         print ("**********************************RIYA******************************************************************")
         print ("Collaborator name ====> ", self.collaborator_name)
-        print ("Round Number ===> ", round_number)
-        print ("Task Name ====> ", task_name)
-        print ("Data Size =====> ",  data_size)
-        #print ("Named tensor ====> ", named_tensors)
+        print ("Tensor Name ===> ", tensor_name)
+        print ("Origin ====> ", origin)
+        print ("FL Round ====> ", fl_round)
+        print ("Report ===> ", report)
+        print ("Tags ===> ", tags)
+        print ("Task Name  ===> ", task_name)
+        print ("Data Size ====> ", data_size)
+        print ("Named Tensors ===> ", named_tensors)
         print ("****************************************************************************************************")        
 
         self.client.send_local_task_results(
