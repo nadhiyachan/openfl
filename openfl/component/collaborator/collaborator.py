@@ -187,6 +187,17 @@ class Collaborator:
         virt_avail = round(virtual_memory.available / (1024 ** 2),2)
         virt_prcnt = virtual_memory.percent
         virt_used = round(virtual_memory.used / (1024 ** 2),2)
+        virt_free = round(virtual_memory.free / (1024 ** 2),2)
+        virt_active = round(virtual_memory.active / (1024 ** 2),2)
+        virt_inactive = round(virtual_memory.inactive / (1024 ** 2),2)
+        virt_buffers = round(virtual_memory.buffers / (1024 ** 2),2)
+        virt_cached = round(virtual_memory.cached / (1024 ** 2),2)
+        virt_shared = round(virtual_memory.shared / (1024 ** 2),2)
+        swap_total = round(swap_memory.total / (1024 ** 2),2)
+        swap_used = round(swap_memory.used / (1024 ** 2),2)
+        swap_free = round(swap_memory.free / (1024 ** 2),2)
+        swap_prcnt = swap_memory.percent
+
         print ("******************************** RIYA COLLABORATOR LOGS***********************************")
         print ("RIYA Round Number : ", round_number)
         print ("RIYA Collaborator Name: ", self.collaborator_name)
@@ -194,8 +205,16 @@ class Collaborator:
         print ("RIYA Virtual Used: ", virt_used)
         print ("RIYA Virtual Avail: ", virt_avail)
         print ("RIYA Virtual Prcnt: ", virt_prcnt)
+        print ("RIYA Virtual Used: ", virt_used )
+        print ("RIYA Virtual Free: ",virt_free )                                                                                                                                                                         print ("RIYA Virtual Active: ",virt_active )
+        print ("RIYA Virtual Inactive: ",virt_inactive )                                                                                                                                                                 print ("RIYA Virtual Buffers: ",virt_buffers )
+        print ("RIYA Virtual Cached: ",virt_cached )
+        print ("RIYA Virtual Shared: ",virt_shared )
+        print ("RIYA Swap Total: ",swap_total )
+        print ("RIYA Swap Used: ",swap_used )
+        print ("RIYA Swap Free: ",swap_free )
+        print ("RIYA Swap Percent: ",swap_prcnt )
         print ("*******************************************************************************************")
-
 
     def run_simulation(self):
         """Specific function for the simulation.

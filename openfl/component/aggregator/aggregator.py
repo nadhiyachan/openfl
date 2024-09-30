@@ -661,14 +661,8 @@ class Aggregator:
 
             task_results.append(tensor_key)
             
-        #NAD: Getting meemory usage
-        virtual_memory = psutil.virtual_memory()
-        mem_used = round(virtual_memory.used / (1024 ** 2),2)
-        print ("******************************************RIYA****************************************************")
-        print ("*******************************RIYA AGGREGATOR LOGS **********************************************")
-        print ("ROUND NUMBER ===> ", round_number)
-        print ("MEM USED ======> ", mem_used)
-        print ("******************************************RIYA****************************************************")
+        #NAD: Calling your print memory functions
+        self.print_memory_usage(round_number)
 
         history = {
                     "round": round_number,
@@ -678,15 +672,50 @@ class Aggregator:
                     "metric_value": mem_used,
         }
         self.metric_queue.put(history)
-        print ("******************************************RIYA****************************************************")
-        print ("HISTORY   ======> ", history)
-        print ("******************************************RIYA****************************************************")
         self.collaborator_tasks_results[task_key] = task_results
 
         with self.lock:
             self._is_collaborator_done(collaborator_name, round_number)
 
             self._end_of_round_with_stragglers_check()
+    
+    def print_memory_usage(self, round_number):
+        print ("Iam in print_memory_usage")
+        virtual_memory = psutil.virtual_memory()
+        swap_memory = psutil.swap_memory()
+        virt_total = round(virtual_memory.total / (1024 ** 2),2)
+        virt_avail = round(virtual_memory.available / (1024 ** 2),2)
+        virt_prcnt = virtual_memory.percent
+        virt_used = round(virtual_memory.used / (1024 ** 2),2)
+        virt_free = round(virtual_memory.free / (1024 ** 2),2)
+        virt_active = round(virtual_memory.active / (1024 ** 2),2)
+        virt_inactive = round(virtual_memory.inactive / (1024 ** 2),2)
+        virt_buffers = round(virtual_memory.buffers / (1024 ** 2),2)
+        virt_cached = round(virtual_memory.cached / (1024 ** 2),2)
+        virt_shared = round(virtual_memory.shared / (1024 ** 2),2)
+        swap_total = round(swap_memory.total / (1024 ** 2),2)
+        swap_used = round(swap_memory.used / (1024 ** 2),2)
+        swap_free = round(swap_memory.free / (1024 ** 2),2)
+        swap_prcnt = swap_memory.percent
+
+        print ("******************************** RIYA AGGREGATOR LOGS***********************************")
+        print ("RIYA Round Number : ", round_number)
+        print ("RIYA Virtual Total: ", virt_total)
+        print ("RIYA Virtual Used: ", virt_used)
+        print ("RIYA Virtual Avail: ", virt_avail)
+        print ("RIYA Virtual Prcnt: ", virt_prcnt)
+        print ("RIYA Virtual Used: ", virt_used )
+        print ("RIYA Virtual Free: ",virt_free )
+        print ("RIYA Virtual Active: ",virt_active )
+        print ("RIYA Virtual Inactive: ",virt_inactive )
+        print ("RIYA Virtual Buffers: ",virt_buffers )
+        print ("RIYA Virtual Cached: ",virt_cached )
+        print ("RIYA Virtual Shared: ",virt_shared )
+        print ("RIYA Swap Total: ",swap_total )
+        print ("RIYA Swap Used: ",swap_used )
+        print ("RIYA Swap Free: ",swap_free )
+        print ("RIYA Swap Percent: ",swap_prcnt )
+        print ("*******************************************************************************************")
 
     def _end_of_round_with_stragglers_check(self):
         """
