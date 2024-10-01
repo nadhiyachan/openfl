@@ -205,7 +205,6 @@ class Collaborator:
         print ("RIYA Virtual Used: ", virt_used)
         print ("RIYA Virtual Avail: ", virt_avail)
         print ("RIYA Virtual Prcnt: ", virt_prcnt)
-        print ("RIYA Virtual Used: ", virt_used )
         print ("RIYA Virtual Free: ", virt_free )
         print ("RIYA Virtual Active: ", virt_active)
         print ("RIYA Virtual Cached: ", virt_cached )
