@@ -9,6 +9,7 @@ from logging import getLogger
 from time import sleep
 from typing import Tuple
 import psutil
+import os
 import numpy as np
 
 from openfl.databases import TensorDB
@@ -173,14 +174,22 @@ class Collaborator:
 
                 # Cleaning tensor db
                 self.tensor_db.clean_up(self.db_store_rounds)
-                # NAD:TODO : Get the Mem usage info here 
-                self.print_memory_usage(round_number)
+
+                print ("*****************COLLABORATOR LOGS*******************************")
+                process = psutil.Process()
+                process_mem = round(process.memory_info().rss / (1024 ** 2),2)
+                print ("FEDAIQE Round: ", round_number)
+                print ("FEDAIQE Process Mem:", process_mem)
+                print ("******************************************************************")
+
+                # NAD:This prints the data correctly : Get the Mem usage info here 
+                #self.print_memory_usage(round_number)
                 
 
         self.logger.info("End of Federation reached. Exiting...")
 
     def print_memory_usage(self, round_number):
-        print ("Iam in print_memory_usage")
+        print ("Iam in collaborator print_memory_usage")
         virtual_memory = psutil.virtual_memory()
         swap_memory = psutil.swap_memory()
         virt_total = round(virtual_memory.total / (1024 ** 2),2)

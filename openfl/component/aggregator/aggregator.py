@@ -8,6 +8,7 @@ import time
 from logging import getLogger
 from threading import Lock
 import psutil
+import os
 
 from openfl.component.straggler_handling_functions import CutoffTimeBasedStragglerHandling
 from openfl.databases import TensorDB
@@ -662,7 +663,7 @@ class Aggregator:
             task_results.append(tensor_key)
             
         #NAD: Calling your print memory functions
-        self.print_memory_usage(round_number)
+        #self.print_memory_usage(round_number)
         virtual_memory = psutil.virtual_memory()
         swap_memory = psutil.swap_memory()
 
@@ -1037,6 +1038,14 @@ class Aggregator:
             self.logger.info("Experiment Completed. Cleaning up...")
         else:
             self.logger.info("Starting round %s...", self.round_number)
+          
+        #NADHIYA: Do the print here   
+        print ("*******************AGGREGATOR LOGS*******************************")
+        process = psutil.Process()
+        process_mem = round(process.memory_info().rss / (1024 ** 2),2)
+        print ("FEDAIQE Round: ", round_number)
+        print ("FEDAIQE Process Mem:", process_mem)
+        print ("******************************************************************")
 
         # Cleaning tensor db
         self.tensor_db.clean_up(self.db_store_rounds)
