@@ -668,6 +668,13 @@ class Aggregator:
         swap_memory = psutil.swap_memory()
 
         mem_used = round(virtual_memory.used / (1024 ** 2),2)
+        #NADHIYA: Do the print here   
+        print ("*******************SEND LOCAL TASK RESULTS: AGGREGATOR LOGS*******************************")
+        process = psutil.Process()
+        process_mem = round(process.memory_info().rss / (1024 ** 2),2)
+        print ("FEDAIQE Round: ", round_number)
+        print ("FEDAIQE Process Mem:", process_mem)
+        print ("*******************************************************************************************")
 
         history = {
                     "round": round_number,
@@ -1020,6 +1027,14 @@ class Aggregator:
         all_tasks = self.assigner.get_all_tasks_for_round(self.round_number)
         for task_name in all_tasks:
             self._compute_validation_related_task_metrics(task_name)
+            
+        #NADHIYA: Do the print here   
+        print ("*******************END OF ROUND CHECK: AGGREGATOR LOGS*******************************")
+        process = psutil.Process()
+        process_mem = round(process.memory_info().rss / (1024 ** 2),2)
+        print ("FEDAIQE Round: ", round_number)
+        print ("FEDAIQE Process Mem:", process_mem)
+        print ("*************************************************************************************")
 
         # Once all of the task results have been processed
         self._end_of_round_check_done[self.round_number] = True
@@ -1039,14 +1054,6 @@ class Aggregator:
         else:
             self.logger.info("Starting round %s...", self.round_number)
           
-        #NADHIYA: Do the print here   
-        print ("*******************AGGREGATOR LOGS*******************************")
-        process = psutil.Process()
-        process_mem = round(process.memory_info().rss / (1024 ** 2),2)
-        print ("FEDAIQE Round: ", round_number)
-        print ("FEDAIQE Process Mem:", process_mem)
-        print ("******************************************************************")
-
         # Cleaning tensor db
         self.tensor_db.clean_up(self.db_store_rounds)
         # Reset straggler handling policy for the next round.
