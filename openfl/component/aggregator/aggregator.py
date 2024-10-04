@@ -684,6 +684,16 @@ class Aggregator:
                     "metric_value": mem_used,
         }
         self.metric_queue.put(history)
+
+        history2 = {
+                    "round": round_number,
+                    "metric_origin": "aggregator",
+                    "task_name": "telemetry",
+                    "metric_name": "PROCESS_MEM",
+                    "metric_value": process_mem,
+        }
+        self.metric_queue.put(history2)
+
         self.collaborator_tasks_results[task_key] = task_results
 
         with self.lock:
@@ -1029,7 +1039,7 @@ class Aggregator:
             self._compute_validation_related_task_metrics(task_name)
             
         #NADHIYA: Do the print here   
-        print ("*******************END OF ROUND CHECK: AGGREGATOR LOGS*******************************")
+        print ("*******************RIYA END OF ROUND CHECK: AGGREGATOR LOGS*******************************")
         process = psutil.Process()
         process_mem = round(process.memory_info().rss / (1024 ** 2),2)
         print ("FEDAIQE Round: ", round_number)
