@@ -183,7 +183,7 @@ class Collaborator:
                 print ("******************************************************************")
 
                 # NAD:This prints the data correctly : Get the Mem usage info here 
-                #self.print_memory_usage(round_number)
+                self.print_memory_usage(round_number)
                 
 
         self.logger.info("End of Federation reached. Exiting...")

@@ -663,7 +663,7 @@ class Aggregator:
             task_results.append(tensor_key)
             
         #NAD: Calling your print memory functions
-        #self.print_memory_usage(round_number)
+        self.print_memory_usage(round_number)
         virtual_memory = psutil.virtual_memory()
         swap_memory = psutil.swap_memory()
 
